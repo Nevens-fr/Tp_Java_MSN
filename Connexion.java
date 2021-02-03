@@ -49,6 +49,30 @@ public class Connexion implements ActionListener{
     }
 
     /**
+     * Getter du nom d'user
+     * @return String le nom d'user a utiliser
+     */
+    public String getNomTexte(){
+        return nomText;
+    }
+
+    /**
+     * Getter de l'ip
+     * @return String l'ip  a utiliser
+     */
+    public String getIpText(){
+        return ipText;
+    }
+
+    /**
+     * Getter du port
+     * @return String le port a utiliser
+     */
+    public String getPortText(){
+        return portText;
+    }
+
+    /**
      * Getter JTextField nom
      * @return JTextField le nom de l'utilisateur
      */
@@ -105,10 +129,11 @@ public class Connexion implements ActionListener{
                 ip.setEditable(false);
                 port.setEditable(false);
                 bouton.getBouton().setText("Déconnection");
+                Main.connectionServeur();
             }
         }
         else{
-            System.exit(0);
+            Main.deconnection();
         }
     }
 

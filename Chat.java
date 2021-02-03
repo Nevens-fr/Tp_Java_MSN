@@ -86,14 +86,19 @@ public class Chat implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent arg0){
         if((message.getText() != "" || message.getText() != null) && fenetre.getEstConnecte()){
-            try{
-                String e = new String("<br/><p> <font color=\"red\">Me</font> : "+message.getText()+"</p>");
-                ((HTMLEditorKit)discussion.getEditorKit()).insertHTML((HTMLDocument)discussion.getDocument(), discussion.getDocument().getLength(), e, 0, 0, null);
-            }
-            catch(Exception e){
-
-            }
+            String e = new String("<br/><p> <font color=\"red\">"+fenetre.getConnexion().getNomTexte()+"</font> : "+message.getText()+"</p>");
+            Main.envoiServeur(e);
+            //ecrireMessage(e);
             message.setText(null);
+        }
+    }
+
+    public void ecrireMessage(String e){
+        try{
+            ((HTMLEditorKit)discussion.getEditorKit()).insertHTML((HTMLDocument)discussion.getDocument(), discussion.getDocument().getLength(), e, 0, 0, null);
+        }
+        catch(Exception exc){
+
         }
     }
 }

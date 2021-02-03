@@ -12,6 +12,9 @@ import javax.swing.border.EmptyBorder;
  * @param contentPane le gestionnaire de placement dans la fenetre
  * @param serialVersionUID numéro de version
  * @param estConnecte Défini si l'utilisateur est connecté ou non
+ * @param connexion La classe contenant le necessaire pour se connecter au serveur
+ * @param chat la classe permettant la gestion du système de message
+ * @param connect la classe permettant d'afficher les personnes connectées
 */
 public class Fenetre extends JFrame{
     
@@ -20,6 +23,8 @@ public class Fenetre extends JFrame{
     private JPanel principalPanel;
     private Connexion connexion;
     private boolean estConnecte;
+    private Chat chat;
+    private Connectes connect;
 
     /**
      * Constructeur de la fenetre
@@ -75,7 +80,7 @@ public class Fenetre extends JFrame{
         panelNord6.add(connexion.getPort());
 
         //Placement de la zone des utilisateurs connectés
-        Connectes connect = new Connectes(this);
+        connect = new Connectes(this);
 
         Box panelOuest = Box.createVerticalBox();
 
@@ -85,7 +90,7 @@ public class Fenetre extends JFrame{
         panelOuest.add(connect.getConnectes());
 
         //Placement de la zone de discussion
-        Chat chat = new Chat(this);
+        chat = new Chat(this);
 
         Box panelEst = Box.createVerticalBox();
 
@@ -116,5 +121,29 @@ public class Fenetre extends JFrame{
      */
     public boolean getEstConnecte(){
         return estConnecte;
+    }
+
+    /**
+     * Getter de la partie de l'interface affichants les membres connectés
+     * @return Connectes la classe gérant l'afichages des gens connectés
+     */
+    public Connectes getConnect(){
+        return connect;
+    }
+
+    /**
+     * Getter de la partie de l'interface permettant la connection et déconnection au serveur
+     * @return Connexion la connection et déconnection au serveur
+     */
+    public Connexion getConnexion(){
+        return connexion;
+    }
+
+    /**
+     * Getter de la zone de discussion
+     * @return Chat la zone de discussion
+     */
+    public Chat getChat(){
+        return chat;
     }
 }
