@@ -86,15 +86,21 @@ public class Chat implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent arg0){
         if((message.getText() != "" || message.getText() != null) && fenetre.getEstConnecte()){
-            String e = new String("<br/><p> <font color=\"red\">"+fenetre.getConnexion().getNomTexte()+"</font> : "+message.getText()+"</p>");
-            Main.envoiServeur(e);
-            //ecrireMessage(e);
+            String e = new String("<font color=\"red\">"+fenetre.getConnexion().getNomTexte()+"</font> : "+message.getText());
+            String envoi = new String("MESS"+fenetre.getConnexion().getNomTexte()+" "+message.getText());
+            Main.envoiServeur(envoi);
+            ecrireMessage(e);
             message.setText(null);
         }
     }
 
+    /**
+     * Ecris la chaine de caractère passée en paramètre dans le chat
+     * @param e la chaine à écrire dans le chat
+     */
     public void ecrireMessage(String e){
         try{
+            e = "<br/><p>" + e + "</p>";
             ((HTMLEditorKit)discussion.getEditorKit()).insertHTML((HTMLDocument)discussion.getDocument(), discussion.getDocument().getLength(), e, 0, 0, null);
         }
         catch(Exception exc){

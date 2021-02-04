@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.BorderLayout;
 import java.awt.event.*;
 
@@ -124,15 +123,21 @@ public class Connexion implements ActionListener{
                 nomText = nom.getText();
                 ipText = ip.getText();
                 portText = port.getText();
+
                 fenetre.setEstConnecte(true);
+                fenetre.getConnect().getConnectes().setText("<br/><p> <font color=\"red\">"+nomText+"</font>");
+
                 nom.setEditable(false);
                 ip.setEditable(false);
                 port.setEditable(false);
                 bouton.getBouton().setText("Déconnection");
+
                 Main.connectionServeur();
+                Main.envoiServeur("LOGI"+nomText);
             }
         }
         else{
+            Main.envoiServeur("LOGO"+nomText);
             Main.deconnection();
         }
     }

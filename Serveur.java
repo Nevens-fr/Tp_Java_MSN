@@ -27,7 +27,7 @@ public class Serveur {
             do{
                 client = serveur.accept();
                 listeDesClients.add(new Client(client));
-                System.out.println("Client connecté ! ");
+                System.out.println("Client connecté ! "+ listeDesClients.size() + "connecté(s)");
             }while(true);
         }
         catch(Exception e){       }
@@ -37,6 +37,7 @@ public class Serveur {
         try{
             serveur.close();
             System.out.println("Serveur fermé");
+            System.exit(0);
         }
         catch(Exception e){       }
     }

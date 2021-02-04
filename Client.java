@@ -38,6 +38,8 @@ public class Client extends Thread{
                 ecrit(message);
         }
 
+        Serveur.getListeDesClients().remove(this);
+
         if(Serveur.getListeDesClients().size() == 1){
             Serveur.fermetureServeur();
         }
@@ -72,9 +74,9 @@ public class Client extends Thread{
 
         for(Client c : liste){
             if(c != this){
-                ecrire.write(e);
-                ecrire.flush();
-            }
+                c.ecrire.write(e);
+                c.ecrire.flush(); 
+            }  
         }
     }
 }

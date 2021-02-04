@@ -1,4 +1,8 @@
 import javax.swing.*;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Classe qui permet la gestion des utilisateurs connectés
@@ -7,8 +11,10 @@ import javax.swing.*;
  */
 public class Connectes{
     
-    private JTextField connectes;
+    private JEditorPane connectes;
     private Fenetre fenetre;
+    private ArrayList<String> listeCo;
+    private ArrayList<String> listeCouleur;
 
     /**
      * Constructeur
@@ -16,17 +22,89 @@ public class Connectes{
      */
     public Connectes(Fenetre fenetre){
         this.fenetre = fenetre;
-        this.connectes = new JTextField();
-        this.connectes.setText("Aucun connecté");
-        this.connectes.setSize(10, 50);
-        this.connectes.setEditable(false);
+        this.connectes = new JEditorPane();
+
+        this.connectes.setEditorKit(new HTMLEditorKit());
+        this.connectes.setDocument(new HTMLDocument());
+        this.connectes.setContentType("text/html");
+        this.connectes.setText("<p>Aucun connecté</p>");
+        this.connectes.setPreferredSize(new Dimension(100, 50));
+
+        listeCo = new ArrayList<String>();
+        listeCouleur = new ArrayList<String>();
+
+        listeCouleur.add("green");
+        listeCouleur.add("yellow");
+        listeCouleur.add("blue");
     }
 
     /**
-     * Getter des connecté
-     * @return JTextField la zone de texte contenant les utilisateurs connectés
+     * Getter des connectés
+     * @return JEditorPane la zone de texte contenant les utilisateurs connectés
      */
-    public JTextField getConnectes(){
+    public JEditorPane getConnectes(){
         return connectes;
+    }
+
+    /**
+     * Ajoute un nouvel utilisateur à la liste des connectés
+     * @param e la chaine de caractère contenant le nom du nouvel utilisateur
+     */
+    public void addConnecteUtilisateur(String e){
+        boolean contient = false;
+        try{
+            String e1 = "<font color=\""+listeCouleur.get(listeCouleur.size() - 1)+"\">"+e+"</font>";
+
+            for(String e2 : listeCo){
+                if(e2.indexOf(e) >= 0){
+                    contient = true;
+                }
+            }
+            if(contient == false){
+                listeCouleur.remove(listeCouleur.size() - 1);
+                listeCo.add(e1);
+                ((HTMLEditorKit)connectes.getEditorKit()).insertHTML((HTMLDocument)connectes.getDocument(), connectes.getDocument().getLength(), e1, 0, 0, null);
+                Main.envoiServeur("LOGI"+fenetre.getConnexion().getNomTexte());
+            }
+        }
+        catch(Exception exc){
+
+        }
+    }
+
+    /**
+     * Un nouveau message est reçu, on 
+     * @param e
+     */
+    public void nouveauMessage(String e){
+        int tailleNom = e.indexOf(" ");
+        String nom = e.substring(0, tailleNom);
+
+        for(String elem : listeCo){
+            if(elem.indexOf(nom) >= 0){
+                String send = elem + " : " +e.substring(tailleNom, e.length());
+                fenetre.getChat().ecrireMessage(send);
+            }
+        }
+    }
+
+    /**
+     * Supprime l'utilisateur de la liste des personnes connectées
+     * @param e le nom de l'utilisateur
+     */
+    public void removeUtilisateur(String e){
+
+        for(String elem : listeCo){
+            if(elem.indexOf(e) >= 0){
+                listeCo.remove(elem);
+            }
+        }
+        connectes.setText("<p> </p>");
+        for(String elem2 : listeCo){
+            try{
+                ((HTMLEditorKit)connectes.getEditorKit()).insertHTML((HTMLDocument)connectes.getDocument(), 0, elem2, 0, 0, null);
+            }
+            catch(Exception exc){ }
+        }
     }
 }
