@@ -33,9 +33,14 @@ public class Connectes{
         listeCo = new ArrayList<String>();
         listeCouleur = new ArrayList<String>();
 
+        listeCouleur.add("#f4780a");//orange
         listeCouleur.add("green");
-        listeCouleur.add("yellow");
+        listeCouleur.add("#1C9B80");//turquoise
         listeCouleur.add("blue");
+        listeCouleur.add("#0d4acd");//bleu foncé
+        listeCouleur.add("#be0dcd");//magenta
+        listeCouleur.add("#ff00d1");//rose
+        listeCouleur.add("#8b00ff");//violet
     }
 
     /**
@@ -96,15 +101,22 @@ public class Connectes{
 
         for(String elem : listeCo){
             if(elem.indexOf(e) >= 0){
-                listeCo.remove(elem);
+                try{
+                    listeCo.remove(elem);
+                    this.connectes.setDocument(new HTMLDocument());
+                    this.connectes.setContentType("text/html");
+                    connectes.setText("<br/><p> <font color=\"red\">"+fenetre.getConnexion().getNomTexte()+"</font>");
+                    for(String elem2 : listeCo){
+                        try{
+                            String send = elem2;
+                            ((HTMLEditorKit)connectes.getEditorKit()).insertHTML((HTMLDocument)connectes.getDocument(), 0, send, 0, 0, null);
+                        }
+                        catch(Exception exc){ }
+                    }
+                }
+                catch(Exception exc){   System.out.println("Marche po " + exc.getMessage());}
             }
         }
-        connectes.setText("<p> </p>");
-        for(String elem2 : listeCo){
-            try{
-                ((HTMLEditorKit)connectes.getEditorKit()).insertHTML((HTMLDocument)connectes.getDocument(), 0, elem2, 0, 0, null);
-            }
-            catch(Exception exc){ }
-        }
+        
     }
 }

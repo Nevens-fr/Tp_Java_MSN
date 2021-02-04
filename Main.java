@@ -30,7 +30,6 @@ public class Main{
         Connexion connection = fenetre.getConnexion();
         Connectes connect = fenetre.getConnect();
         
-        //port = 64992;
         socks = null;
         lecture = null;
 
@@ -44,33 +43,32 @@ public class Main{
             System.out.println("Connecté au serveur");
             chat.ecrireMessage("<p><b>SERVEUR : Vous êtes maintenant connecté</b></p>");
             lecture = new BufferedInputStream(socks.getInputStream());
+                    //création d'un thread
+            Thread t = new Thread(new Runnable(){
+                public void run(){
+                    String message = null;
+                    while(socks.isClosed() == false){
+                        //lecture de message du serveur
+                        try{
+                            stream = lecture.read(b);
+                            message = new String(b, 0, stream);
+
+                            if(message.indexOf("LOGI") >= 0)
+                                connect.addConnecteUtilisateur(message.substring(4, message.length()));
+                            else if(message.indexOf("LOGO") >= 0)
+                                connect.removeUtilisateur(message.substring(4, message.length()));
+                            else
+                                connect.nouveauMessage(message.substring(4, message.length()));
+                        }
+                        catch(Exception e){ }
+                    }
+                }
+            });
+            t.start();
         }
         catch(Exception e){   
             chat.ecrireMessage("<p><b>Connection serveur échouée</b></p>");
         }
-
-        //création d'un thread
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                String message = null;
-                while(socks.isClosed() == false){
-                    //lecture de message du serveur
-                    try{
-                        stream = lecture.read(b);
-                        message = new String(b, 0, stream);
-
-                        if(message.indexOf("LOGI") >= 0)
-                            connect.addConnecteUtilisateur(message.substring(4, message.length()));
-                        else if(message.indexOf("LOGO") >= 0)
-                            connect.removeUtilisateur(message.substring(4, message.length()));
-                        else
-                            connect.nouveauMessage(message.substring(4, message.length()));
-                    }
-                    catch(Exception e){ }
-                }
-            }
-        });
-        t.start();
     }
 
     /**
