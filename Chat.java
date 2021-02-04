@@ -53,6 +53,27 @@ public class Chat implements ActionListener {
         message.setSize(20, 10);
         message.setText(null);
 
+        message.addKeyListener(new KeyListener(){
+            /**
+             * Permet d'envoyer le message quand l'utilisateur presse la touche Entrée
+             */
+            public void keyTyped(KeyEvent e1){
+                if(e1.getKeyChar() == '\n'){
+                    String e = new String("<font color=\"red\">"+fenetre.getConnexion().getNomTexte()+"</font> : "+message.getText());
+                    String envoi = new String("MESS"+fenetre.getConnexion().getNomTexte()+" "+message.getText());
+                    Main.envoiServeur(envoi);
+                    ecrireMessage(e);
+                    message.setText(null);
+                }
+            }
+            public void keyReleased(KeyEvent e1){
+
+            }
+
+            public void keyPressed(KeyEvent e1){
+            }
+        });
+
         smiley = new Smiley(message);
     }
 
@@ -117,7 +138,7 @@ public class Chat implements ActionListener {
      */
     public void ecrireMessage(String e){
         try{
-            e = "<br/><p>" + e + "</p>";
+            e = "<br/><p style=\"font-size:16\">" + e + "</p>";
             ((HTMLEditorKit)discussion.getEditorKit()).insertHTML((HTMLDocument)discussion.getDocument(), discussion.getDocument().getLength(), e, 0, 0, null);
         }
         catch(Exception exc){

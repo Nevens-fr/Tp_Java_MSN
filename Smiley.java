@@ -49,39 +49,64 @@ public class Smiley implements ActionListener {
         miniFenetre.setLocationRelativeTo(null);
 
         JPanel pane = new JPanel();
-        pane.setLayout(new GridLayout(0,3));
-        pane.setPreferredSize(new Dimension(300, 25));
+        pane.setLayout(new GridLayout(2,3));
+        pane.setPreferredSize(new Dimension(300, 75));
 
-        JButton sourire = new JButton("<html>&#128522</html>");//sourire
+        JButton sourire = new JButton("<html><h1>&#128522</h1></html>");//sourire
         sourire.setBorderPainted(false);
         sourire.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0){
                 message.setText(message.getText() + "&#128522");
-                miniFenetre.dispatchEvent(new WindowEvent(miniFenetre, WindowEvent.WINDOW_CLOSING));;
+                //miniFenetre.dispatchEvent(new WindowEvent(miniFenetre, WindowEvent.WINDOW_CLOSING));; close window
             }
         });
 
-        JButton innocent = new JButton("<html>&#128519</html>");//innocent
+        JButton innocent = new JButton("<html><h1>&#128519</h1></html>");//innocent
         innocent.setBorderPainted(false);
         innocent.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0){
                 message.setText(message.getText() + "&#128519");
-                miniFenetre.dispatchEvent(new WindowEvent(miniFenetre, WindowEvent.WINDOW_CLOSING));;
             }
         });
 
-        JButton rire = new JButton("<html>&#128514</html>");//rire
+        JButton rire = new JButton("<html><h1>&#128514</h1></html>");//rire
         rire.setBorderPainted(false);
         rire.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0){
                 message.setText(message.getText() + "&#128514");
-                miniFenetre.dispatchEvent(new WindowEvent(miniFenetre, WindowEvent.WINDOW_CLOSING));;
+            }
+        });
+
+        JButton clinDOeil = new JButton("<html><h1>&#128521</h1></html>");//clinDOeil
+        clinDOeil.setBorderPainted(false);
+        clinDOeil.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent arg0){
+                message.setText(message.getText() + "&#128521");
+            }
+        });
+
+        JButton tongue = new JButton("<html><h1>&#128539</h1></html>");//tongue
+        tongue.setBorderPainted(false);
+        tongue.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent arg0){
+                message.setText(message.getText() + "&#128539");
+            }
+        });
+
+        JButton noMouth = new JButton("<html><h1>&#128566</h1></html>");//noMouth
+        noMouth.setBorderPainted(false);
+        noMouth.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent arg0){
+                message.setText(message.getText() + "&#128566");
             }
         });
 
         pane.add(sourire);
         pane.add(innocent);
         pane.add(rire);
+        pane.add(clinDOeil);
+        pane.add(tongue);
+        pane.add(noMouth);
 
         miniFenetre.add(pane);
 
