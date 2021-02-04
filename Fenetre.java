@@ -3,6 +3,11 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * @author Aurélien Tudoret
+ * @version 1.0
+ */
+
 
 /**
  * Une classe Fenetre, classe fille de JFrame qui permet de créer une fenetre personnalisée
@@ -95,12 +100,15 @@ public class Fenetre extends JFrame{
         Box panelEst = Box.createVerticalBox();
 
         principalPanel.add(panelEst, BorderLayout.CENTER);
+        Box panelEst2 = Box.createHorizontalBox();
 
         panelEst.add(new JLabel("Discussion"));
         panelEst.add(chat.getScroll());
         panelEst.add(new JLabel("Message"));
         panelEst.add(chat.getMessage());
-        panelEst.add(chat.getBouton());
+        panelEst.add(panelEst2);
+        panelEst2.add(chat.getBouton());
+        panelEst2.add(chat.getSmileyBouton());
 
 
         //on rend la feentre visible

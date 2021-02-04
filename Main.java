@@ -2,6 +2,11 @@ import java.net.Socket;
 import java.io.BufferedInputStream;
 import java.io.PrintWriter;
 
+/**
+ * @author Aurélien Tudoret
+ * @version 1.0
+ */
+
 
 /**
  * La classe Main du programme

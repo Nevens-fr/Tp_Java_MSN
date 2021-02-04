@@ -2,6 +2,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 
+/**
+ * @author Aurélien Tudoret
+ * @version 1.0
+ */
+
 public class Serveur {
 
     private static List<Client> listeDesClients;

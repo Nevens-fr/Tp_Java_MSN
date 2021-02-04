@@ -5,12 +5,18 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
+ * @author Aurélien Tudoret
+ * @version 1.0
+ */
+
+/**
  * La classe représente la zone de chat
  * @param discussion le champs de texte contenant tous les messages
  * @param message la zone de texte pour la saisie des messages de l'utilisateur
  * @param bouton le bouton pour envoyer le message de l'utilisateur
  * @param fenetre la fenetre dans laquelle on se connecte
  * @param scroll un layout pour scroller la discussion
+ * @param smiley une fenetre pour choisir des smiley
  */
 public class Chat implements ActionListener {
     
@@ -19,6 +25,7 @@ public class Chat implements ActionListener {
     private Bouton bouton;
     private Fenetre fenetre;
     private JScrollPane scroll;
+    private Smiley smiley;
 
     /**
      * Constructeur
@@ -45,6 +52,8 @@ public class Chat implements ActionListener {
         message = new JTextField();
         message.setSize(20, 10);
         message.setText(null);
+
+        smiley = new Smiley(message);
     }
 
     /**
@@ -72,11 +81,19 @@ public class Chat implements ActionListener {
     }
 
     /**
-     * Getter du bouton
+     * Getter du bouton envoyer
      * @return JButton le bouton envoyer
      */
     public JButton getBouton(){
         return bouton.getBouton();
+    }
+
+    /**
+     * Getter du bouton des smiley
+     * @return JButton le bouton envoyer
+     */
+    public JButton getSmileyBouton(){
+        return smiley.getBouton();
     }
 
     /**

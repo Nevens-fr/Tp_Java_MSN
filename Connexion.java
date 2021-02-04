@@ -2,6 +2,11 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.event.*;
 
+/**
+ * @author Aurélien Tudoret
+ * @version 1.0
+ */
+
 
 /**
  * Une classe qui gère la connexion de l'utilisateur

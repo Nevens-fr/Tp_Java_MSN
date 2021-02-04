@@ -5,6 +5,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
+ * @author Aurélien Tudoret
+ * @version 1.0
+ */
+
+/**
  * Classe qui permet la gestion des utilisateurs connectés
  * @param fenetre la fenetre dans laquelle on se connecte
  * @param connectes Une zone de texte permettant d'afficher les utilisateurs connectés

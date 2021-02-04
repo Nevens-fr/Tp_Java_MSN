@@ -3,6 +3,20 @@ import java.io.PrintWriter;
 import java.io.BufferedInputStream;
 import java.util.*;
 
+
+/**
+ * @author Aurélien Tudoret
+ * @version 1.0
+ */
+
+
+/**
+ * Une classe Client étendant les threads, permet de gèrer toutes les interactions réseaux avec un client
+ * @param sock le socket relié au client
+ * @param ecrire Afin d'écrire des messages vers le client
+ * @param lecture Afin de lire les messages du client
+ * @param message Stockage d'un message en attente d'envoi
+ */
 public class Client extends Thread{
     
     private Socket sock;
