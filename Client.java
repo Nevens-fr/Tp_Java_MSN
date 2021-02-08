@@ -47,16 +47,17 @@ public class Client extends Thread{
      */
     @Override
     public void run(){
-        while(!sock.isClosed()){
-            if(lit())
+        boolean  deco = false;
+        while(!sock.isClosed() && deco == false){
+            if(lit()){
+                if(message.indexOf("LOGO") >= 0){
+                    deco = true;
+                }    
                 ecrit(message);
+            }
         }
 
-        Serveur.getListeDesClients().remove(this);
-
-        if(Serveur.getListeDesClients().size() == 1){
-            Serveur.fermetureServeur();
-        }
+        Serveur.supprimeClient(this);
     }
 
     /**

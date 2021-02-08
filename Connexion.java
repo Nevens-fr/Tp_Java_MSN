@@ -130,21 +130,36 @@ public class Connexion implements ActionListener{
                 portText = port.getText();
 
                 fenetre.setEstConnecte(true);
-                fenetre.getConnect().getConnectes().setText("<br/><p> <font color=\"red\">"+nomText+"</font>");
 
                 nom.setEditable(false);
                 ip.setEditable(false);
                 port.setEditable(false);
                 bouton.getBouton().setText("Déconnection");
 
-                Main.connectionServeur();
-                Main.envoiServeur("LOGI"+nomText);
+                if(Main.connectionServeur()){
+                    Main.envoiServeur("LOGI"+nomText);
+                    fenetre.getConnect().getConnectes().setText("<br/><p> <font color=\"red\">"+nomText+"</font>");
+                }
             }
         }
         else{
             Main.envoiServeur("LOGO"+nomText);
             Main.deconnection();
         }
+    }
+
+    /**
+     * Remet les champs dans un état d'attente de connection
+     */
+    public void resetChamps(){
+        nomText = nom.getText();
+        ipText = ip.getText();
+        portText = port.getText();
+
+        nom.setEditable(true);
+        ip.setEditable(true);
+        port.setEditable(true);
+        bouton.getBouton().setText("Connection");
     }
 
     /**

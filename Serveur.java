@@ -37,14 +37,14 @@ public class Serveur {
         }
         catch(Exception e){       }
     }
-        //Fermeture serveur
-    public static void fermetureServeur(){
-        try{
-            serveur.close();
-            System.out.println("Serveur fermé");
-            System.exit(0);
-        }
-        catch(Exception e){       }
+
+    /**
+     * Supprime le client passé en paramètre de la liste des sockets connectés
+     * @param client
+     */
+    public static void supprimeClient(Client client){
+        listeDesClients.remove(client);
+        System.out.println("Client déconnecté ! "+ listeDesClients.size() + "connecté(s) restant(s)");
     }
 
     /**

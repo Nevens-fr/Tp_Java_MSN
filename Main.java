@@ -29,8 +29,9 @@ public class Main{
 
     /**
      * Effectue la connexion au serveur
+     * @return boolean retourne true si tout c'est bien passé
      */
-    public static void connectionServeur(){
+    public static boolean connectionServeur(){
         Chat chat = fenetre.getChat();
         Connexion connection = fenetre.getConnexion();
         Connectes connect = fenetre.getConnect();
@@ -40,8 +41,6 @@ public class Main{
 
         stream = 0;
         byte[] b = new byte[4096];
-
-        while(fenetre.getEstConnecte() == false);
 
         try{
             socks = new Socket(connection.getIpText(), Integer.parseInt(connection.getPortText()));
@@ -70,9 +69,13 @@ public class Main{
                 }
             });
             t.start();
+            return true;
         }
         catch(Exception e){   
             chat.ecrireMessage("<p><b>Connection serveur échouée</b></p>");
+            fenetre.setEstConnecte(false);
+            connection.resetChamps();
+            return false;
         }
     }
 
