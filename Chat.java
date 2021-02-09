@@ -50,7 +50,7 @@ public class Chat implements ActionListener {
         scroll = new JScrollPane(discussion);
 
         message = new JTextField();
-        message.setSize(20, 10);
+        message.setPreferredSize(new Dimension(300, 50));
         message.setText(null);
 
         message.addKeyListener(new KeyListener(){

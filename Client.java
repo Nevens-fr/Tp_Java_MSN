@@ -56,7 +56,10 @@ public class Client extends Thread{
                 ecrit(message);
             }
         }
-
+        try{
+            sock.close();
+        }
+        catch(Exception e){     }
         Serveur.supprimeClient(this);
     }
 
