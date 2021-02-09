@@ -1,5 +1,9 @@
+package ClientChat;
+
 import javax.swing.*;
-import java.awt.BorderLayout;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.DocumentEvent;
+
 import java.awt.event.*;
 
 /**
@@ -40,6 +44,8 @@ public class Connexion implements ActionListener{
 
         bouton = new Bouton("Connection");
         bouton.getBouton().addActionListener(this);
+        bouton.getBouton().setEnabled(false);
+
         this.nom = nom;
         this.nom.setText(null);
         this.ip = ip;
@@ -50,6 +56,69 @@ public class Connexion implements ActionListener{
         nomText = null;
         ipText = null;
         portText = null;
+
+        nom.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void changedUpdate(DocumentEvent event){
+                updated(event);
+            }
+            @Override
+            public void insertUpdate(DocumentEvent event){
+                updated(event);
+            }
+            @Override
+            public void removeUpdate(DocumentEvent event){
+                updated(event);
+            }
+
+            public void updated(DocumentEvent event){
+                if(nom.getText().length() > 0 && ip.getText().length() > 0 && port.getText().length() > 0){
+                    bouton.getBouton().setEnabled(true);
+                }
+            }
+        });
+
+        ip.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void changedUpdate(DocumentEvent event){
+                updated(event);
+            }
+            @Override
+            public void insertUpdate(DocumentEvent event){
+                updated(event);
+            }
+            @Override
+            public void removeUpdate(DocumentEvent event){
+                updated(event);
+            }
+
+            public void updated(DocumentEvent event){
+                if(nom.getText().length() > 0 && ip.getText().length() > 0 && port.getText().length() > 0){
+                    bouton.getBouton().setEnabled(true);
+                }
+            }
+        });
+
+        port.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void changedUpdate(DocumentEvent event){
+                updated(event);
+            }
+            @Override
+            public void insertUpdate(DocumentEvent event){
+                updated(event);
+            }
+            @Override
+            public void removeUpdate(DocumentEvent event){
+                updated(event);
+            }
+
+            public void updated(DocumentEvent event){
+                if(nom.getText().length() > 0 && ip.getText().length() > 0 && port.getText().length() > 0){
+                    bouton.getBouton().setEnabled(true);
+                }
+            }
+        });
     }
 
     /**
@@ -115,31 +184,20 @@ public class Connexion implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent arg0){
         if(fenetre.getEstConnecte() == false){
-            if(!champsSontValides()){
-                JFrame dial = new JFrame();
-                dial.setTitle("Nom ou IP ou port invalide");
-                dial.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                dial.add(new JLabel("Nom ou IP ou port invalide"), BorderLayout.CENTER);
-                dial.setSize(300, 100);
-                dial.setLocationRelativeTo(null);
-                dial.setVisible(true);
-            }
-            else{
-                nomText = nom.getText();
-                ipText = ip.getText();
-                portText = port.getText();
+            nomText = nom.getText();
+            ipText = ip.getText();
+            portText = port.getText();
 
-                fenetre.setEstConnecte(true);
+            fenetre.setEstConnecte(true);
 
-                nom.setEditable(false);
-                ip.setEditable(false);
-                port.setEditable(false);
-                bouton.getBouton().setText("Déconnection");
+            nom.setEditable(false);
+            ip.setEditable(false);
+            port.setEditable(false);
+            bouton.getBouton().setText("Déconnection");
 
-                if(Main.connectionServeur()){
-                    Main.envoiServeur("LOGI"+nomText);
-                    fenetre.getConnect().getConnectes().setText("<br/><p> <font color=\"red\">"+nomText+"</font>");
-                }
+            if(Main.connectionServeur()){
+                Main.envoiServeur("LOGI"+nomText);
+                fenetre.getConnect().getConnectes().setText("<br/><p> <font color=\"red\">"+nomText+"</font>");
             }
         }
         else{
@@ -161,23 +219,4 @@ public class Connexion implements ActionListener{
         port.setEditable(true);
         bouton.getBouton().setText("Connection");
     }
-
-    /**
-     * Teste les valeurs dans les champs pour voir si elles sont valides
-     * @return boolean true si les champs sont valides, false sinon
-     */
-    private boolean champsSontValides(){
-        if(nom.getText() == "" || port.getText() == "" || ip.getText() == "")
-            return false;
-        else{
-            try{
-                Integer.parseInt(port.getText());
-                return true;
-            }
-            catch(Exception e){
-                return false;
-            }
-        }
-    }
-
 }

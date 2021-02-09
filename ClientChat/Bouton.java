@@ -1,3 +1,4 @@
+package ClientChat;
 
 import javax.swing.JButton;
 

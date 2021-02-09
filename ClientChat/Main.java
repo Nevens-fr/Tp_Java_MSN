@@ -1,3 +1,5 @@
+package ClientChat;
+
 import java.net.Socket;
 import java.io.BufferedInputStream;
 import java.io.PrintWriter;

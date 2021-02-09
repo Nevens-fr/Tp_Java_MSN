@@ -1,8 +1,12 @@
+package ClientChat;
+
 import javax.swing.*;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.DocumentEvent;
 
 /**
  * @author Aurélien Tudoret
@@ -36,6 +40,7 @@ public class Chat implements ActionListener {
         this.fenetre = fenetre;
 
         bouton = new Bouton("Envoyer");
+        bouton.getBouton().setEnabled(false);
 
         bouton.getBouton().addActionListener(this);
 
@@ -52,6 +57,31 @@ public class Chat implements ActionListener {
         message = new JTextField();
         message.setPreferredSize(new Dimension(300, 50));
         message.setText(null);
+
+        //permet de griser le bouton d'envoi si la zone de message est vide
+        message.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void changedUpdate(DocumentEvent event){
+                updated(event);
+            }
+            @Override
+            public void insertUpdate(DocumentEvent event){
+                updated(event);
+            }
+            @Override
+            public void removeUpdate(DocumentEvent event){
+                updated(event);
+            }
+            
+            public void updated(DocumentEvent event){
+                if(message.getDocument().getLength()> 0  && fenetre.getEstConnecte()){
+                    bouton.getBouton().setEnabled(true);
+                }
+                else{
+                    bouton.getBouton().setEnabled(false);
+                }
+            }
+        });
 
         message.addKeyListener(new KeyListener(){
             /**

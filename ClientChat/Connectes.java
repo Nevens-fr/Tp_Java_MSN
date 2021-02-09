@@ -1,3 +1,5 @@
+package ClientChat;
+
 import javax.swing.*;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;

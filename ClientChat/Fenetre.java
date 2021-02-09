@@ -1,3 +1,5 @@
+package ClientChat;
+
 import java.awt.*;
 
 import javax.swing.*;
