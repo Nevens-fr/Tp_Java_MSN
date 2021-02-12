@@ -73,6 +73,10 @@ public class Chat implements ActionListener {
                 updated(event);
             }
             
+            /**
+             * Active ou désactive le bouton d'envoi si la zone de text est vide
+             * @param event L'évenement reçu
+             */
             public void updated(DocumentEvent event){
                 if(message.getDocument().getLength()> 0  && fenetre.getEstConnecte()){
                     bouton.getBouton().setEnabled(true);
@@ -87,6 +91,7 @@ public class Chat implements ActionListener {
             /**
              * Permet d'envoyer le message quand l'utilisateur presse la touche Entrée
              */
+            @Override
             public void keyTyped(KeyEvent e1){
                 if(e1.getKeyChar() == '\n'){
                     String e = new String("<font color=\"red\">"+fenetre.getConnexion().getNomTexte()+"</font> : "+message.getText());
@@ -96,10 +101,18 @@ public class Chat implements ActionListener {
                     message.setText(null);
                 }
             }
-            public void keyReleased(KeyEvent e1){
 
+            /**
+             * Override obligatoire mais non utilisé
+             */
+            @Override
+            public void keyReleased(KeyEvent e1){
             }
 
+            /**
+             * Override obligatoire mais non utilisé
+             */
+            @Override
             public void keyPressed(KeyEvent e1){
             }
         });

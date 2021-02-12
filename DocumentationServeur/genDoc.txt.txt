@@ -1,1 +1,1 @@
-javadoc ../DocumentationServeur/*.java
+javadoc ../ServeurChat/*.java

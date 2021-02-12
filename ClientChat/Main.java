@@ -49,7 +49,8 @@ public class Main{
             System.out.println("Connecté au serveur");
             chat.ecrireMessage("<p><b>SERVEUR : Vous êtes maintenant connecté</b></p>");
             lecture = new BufferedInputStream(socks.getInputStream());
-                    //création d'un thread
+            
+            //création d'un thread pour la lecture de message envoyé par le serveur
             Thread t = new Thread(new Runnable(){
                 public void run(){
                     String message = null;

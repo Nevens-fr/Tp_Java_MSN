@@ -57,6 +57,7 @@ public class Connexion implements ActionListener{
         ipText = null;
         portText = null;
 
+        //Ajout d'un listener sur le champs nom afin de vérifier s'il est rempli
         nom.getDocument().addDocumentListener(new DocumentListener(){
             @Override
             public void changedUpdate(DocumentEvent event){
@@ -71,6 +72,10 @@ public class Connexion implements ActionListener{
                 updated(event);
             }
 
+            /**
+             * Active ou désactive le bouton d'envoi si la zone de text est vide
+             * @param event L'évenement reçu
+             */
             public void updated(DocumentEvent event){
                 if(nom.getText().length() > 0 && ip.getText().length() > 0 && port.getText().length() > 0){
                     bouton.getBouton().setEnabled(true);
@@ -78,6 +83,7 @@ public class Connexion implements ActionListener{
             }
         });
 
+        //Ajout d'un listener sur le champs ip afin de vérifier s'il est rempli
         ip.getDocument().addDocumentListener(new DocumentListener(){
             @Override
             public void changedUpdate(DocumentEvent event){
@@ -92,6 +98,10 @@ public class Connexion implements ActionListener{
                 updated(event);
             }
 
+            /**
+             * Active ou désactive le bouton d'envoi si la zone de text est vide
+             * @param event L'évenement reçu
+             */
             public void updated(DocumentEvent event){
                 if(nom.getText().length() > 0 && ip.getText().length() > 0 && port.getText().length() > 0){
                     bouton.getBouton().setEnabled(true);
@@ -99,6 +109,7 @@ public class Connexion implements ActionListener{
             }
         });
 
+        //Ajout d'un listener sur le champs port afin de vérifier s'il est rempli
         port.getDocument().addDocumentListener(new DocumentListener(){
             @Override
             public void changedUpdate(DocumentEvent event){
@@ -113,6 +124,10 @@ public class Connexion implements ActionListener{
                 updated(event);
             }
 
+            /**
+             * Active ou désactive le bouton d'envoi si la zone de text est vide
+             * @param event L'évenement reçu
+             */
             public void updated(DocumentEvent event){
                 if(nom.getText().length() > 0 && ip.getText().length() > 0 && port.getText().length() > 0){
                     bouton.getBouton().setEnabled(true);
