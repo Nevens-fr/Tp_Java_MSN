@@ -80,6 +80,9 @@ public class Connexion implements ActionListener{
                 if(nom.getText().length() > 0 && ip.getText().length() > 0 && port.getText().length() > 0){
                     bouton.getBouton().setEnabled(true);
                 }
+                else{
+                    bouton.getBouton().setEnabled(false);
+                }
             }
         });
 
@@ -106,6 +109,9 @@ public class Connexion implements ActionListener{
                 if(nom.getText().length() > 0 && ip.getText().length() > 0 && port.getText().length() > 0){
                     bouton.getBouton().setEnabled(true);
                 }
+                else{
+                    bouton.getBouton().setEnabled(false);
+                }
             }
         });
 
@@ -131,6 +137,9 @@ public class Connexion implements ActionListener{
             public void updated(DocumentEvent event){
                 if(nom.getText().length() > 0 && ip.getText().length() > 0 && port.getText().length() > 0){
                     bouton.getBouton().setEnabled(true);
+                }
+                else{
+                    bouton.getBouton().setEnabled(false);
                 }
             }
         });

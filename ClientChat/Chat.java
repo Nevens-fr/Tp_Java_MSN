@@ -58,6 +58,9 @@ public class Chat implements ActionListener {
         message.setPreferredSize(new Dimension(300, 50));
         message.setText(null);
 
+        smiley = new Smiley(message);
+        smiley.getBouton().setEnabled(false);
+
         //permet de griser le bouton d'envoi si la zone de message est vide
         message.getDocument().addDocumentListener(new DocumentListener(){
             @Override
@@ -80,9 +83,11 @@ public class Chat implements ActionListener {
             public void updated(DocumentEvent event){
                 if(message.getDocument().getLength()> 0  && fenetre.getEstConnecte()){
                     bouton.getBouton().setEnabled(true);
+                    smiley.getBouton().setEnabled(true);
                 }
                 else{
                     bouton.getBouton().setEnabled(false);
+                    smiley.getBouton().setEnabled(false);
                 }
             }
         });
@@ -116,8 +121,6 @@ public class Chat implements ActionListener {
             public void keyPressed(KeyEvent e1){
             }
         });
-
-        smiley = new Smiley(message);
     }
 
     /**
@@ -167,8 +170,19 @@ public class Chat implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent arg0){
         if((message.getText() != "" || message.getText() != null) && fenetre.getEstConnecte()){
-            String e = new String("<font color=\"red\">"+fenetre.getConnexion().getNomTexte()+"</font> : "+message.getText());
-            String envoi = new String("MESS"+fenetre.getConnexion().getNomTexte()+" "+message.getText());
+            String e = null;
+
+            String destinataire = fenetre.getConnect().userSelectionne();
+            String envoi = null;
+
+            if(destinataire == "Général"){
+                envoi = new String("MESS"+fenetre.getConnexion().getNomTexte()+" "+message.getText());
+                e= new String("<font color=\"red\">"+fenetre.getConnexion().getNomTexte()+"</font> : "+message.getText());
+            }
+            else{
+                envoi = new String("MESP"+ destinataire + ":" + fenetre.getConnexion().getNomTexte()+" "+message.getText());
+                e = new String("<font color=\"red\">DE "+fenetre.getConnexion().getNomTexte()+ " A " + destinataire +" : "+message.getText()+"</font>");
+            }
             Main.envoiServeur(envoi);
             ecrireMessage(e);
             message.setText(null);

@@ -104,11 +104,14 @@ public class Fenetre extends JFrame{
 
         principalPanel.add(panelEst, BorderLayout.CENTER);
         Box panelEst2 = Box.createHorizontalBox();
+        Box panelEst3 = Box.createHorizontalBox();
 
         panelEst.add(new JLabel("Discussion"));
         panelEst.add(chat.getScroll());
         panelEst.add(new JLabel("Message"));
-        panelEst.add(chat.getMessage());
+        panelEst.add(panelEst3);
+        panelEst3.add(connect.getComboBox());
+        panelEst3.add(chat.getMessage());
         panelEst.add(panelEst2);
         panelEst2.add(chat.getBouton());
         panelEst2.add(chat.getSmileyBouton());

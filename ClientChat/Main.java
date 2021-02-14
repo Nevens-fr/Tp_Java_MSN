@@ -64,6 +64,8 @@ public class Main{
                                 connect.addConnecteUtilisateur(message.substring(4, message.length()));
                             else if(message.indexOf("LOGO") >= 0)
                                 connect.removeUtilisateur(message.substring(4, message.length()));
+                            else if(message.indexOf("MESP") >= 0)
+                                connect.nouveauMessagePrive(message.substring(4, message.length()));
                             else
                                 connect.nouveauMessage(message.substring(4, message.length()));
                         }
