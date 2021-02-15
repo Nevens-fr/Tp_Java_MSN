@@ -181,7 +181,7 @@ public class Chat implements ActionListener {
             }
             else{
                 envoi = new String("MESP"+ destinataire + ":" + fenetre.getConnexion().getNomTexte()+" "+message.getText());
-                e = new String("<font color=\"red\">DE "+fenetre.getConnexion().getNomTexte()+ " A " + destinataire +" : "+message.getText()+"</font>");
+                e = new String("<font color=\"#71463c\">DE "+fenetre.getConnexion().getNomTexte()+ " A " + destinataire +" : "+message.getText()+"</font>");
             }
             Main.envoiServeur(envoi);
             ecrireMessage(e);

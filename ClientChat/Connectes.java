@@ -134,10 +134,29 @@ public class Connectes{
             nomDest += message.charAt(i);
         }
 
-        if (nomDest == fenetre.getConnexion().getNomTexte()){
+        if (stringCompare(nomDest,fenetre.getConnexion().getNomTexte())){
             message = message.substring(i + 1, message.length());
-            System.out.println("MESP" + message);
+            String e = "<font color=\"#71463c\"> DE " + message + "</font>";
+            fenetre.getChat().ecrireMessage(e);
+            //System.out.println("MESP" + message);
         }
+    }
+
+    /**
+     * Compare deux chaine de caractères
+     * @param s1 première chaine
+     * @param s2 seconde chaine
+     * @return boolean true si elles sont égales
+     */
+    private boolean stringCompare(String s1, String s2){
+        if(s1.length() != s2.length())
+            return false;
+        
+        for(int i = 0; i < s1.length(); i++){
+            if(s1.charAt(i) != s2.charAt(i))
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -169,6 +188,10 @@ public class Connectes{
         
     }
 
+    /**
+     * Retourne l'utilisateur actuellement sélectionné dans la combobox
+     * @return String le nom de l'utilisateur sélectionné
+     */
     public String userSelectionne(){
         return (String)comboBox.getSelectedItem();
     }
