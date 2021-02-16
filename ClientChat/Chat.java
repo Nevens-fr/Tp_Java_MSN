@@ -87,7 +87,6 @@ public class Chat implements ActionListener {
                 }
                 else{
                     bouton.getBouton().setEnabled(false);
-                    smiley.getBouton().setEnabled(false);
                 }
             }
         });

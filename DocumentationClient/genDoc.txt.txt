@@ -1,1 +1,2 @@
 javadoc ../DocumentationClient/*.java
+jar cvfe Client.jar ClientChat/Main  ./ClientChat/*.class
