@@ -38,7 +38,7 @@ public class Fenetre extends JFrame{
      */
     public Fenetre(){
 
-        super("Discord_like");
+        super("Msn_like");
 
         estConnecte = false;
 
