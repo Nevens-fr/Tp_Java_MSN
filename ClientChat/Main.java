@@ -23,6 +23,7 @@ public class Main{
     private static Socket socks;
     private static int stream;
     private static BufferedInputStream lecture;
+    
     public static void main(String[] args) {
         
         fenetre = new Fenetre();
@@ -52,22 +53,29 @@ public class Main{
             
             //création d'un thread pour la lecture de message envoyé par le serveur
             Thread t = new Thread(new Runnable(){
+                private String message;
                 public void run(){
-                    String message = null;
+                    message = null;
                     while(socks.isClosed() == false){
                         //lecture de message du serveur
                         try{
                             stream = lecture.read(b);
                             message = new String(b, 0, stream);
 
-                            if(message.indexOf("LOGI") >= 0)
-                                connect.addConnecteUtilisateur(message.substring(4, message.length()));
-                            else if(message.indexOf("LOGO") >= 0)
-                                connect.removeUtilisateur(message.substring(4, message.length()));
-                            else if(message.indexOf("MESP") >= 0)
-                                connect.nouveauMessagePrive(message.substring(4, message.length()));
-                            else
-                                connect.nouveauMessage(message.substring(4, message.length()));
+                            //création d'un nouveau thread pour traiter chaque message
+                            Thread traitement = new Thread(new Runnable(){
+                                public void run(){
+                                    if(message.indexOf("LOGI") >= 0)
+                                        connect.addConnecteUtilisateur(message.substring(4, message.length()));
+                                    else if(message.indexOf("LOGO") >= 0)
+                                        connect.removeUtilisateur(message.substring(4, message.length()));
+                                    else if(message.indexOf("MESP") >= 0)
+                                        connect.nouveauMessagePrive(message.substring(4, message.length()));
+                                    else
+                                        connect.nouveauMessage(message.substring(4, message.length()));
+                                }
+                            });
+                            traitement.start();
                         }
                         catch(Exception e){ }
                     }
@@ -78,8 +86,6 @@ public class Main{
         }
         catch(Exception e){   
             chat.ecrireMessage("<p><b>Connection serveur échouée</b></p>");
-            fenetre.setEstConnecte(false);
-            connection.resetChamps();
             return false;
         }
     }
@@ -101,7 +107,7 @@ public class Main{
     }
 
     /**
-     * fermeture du socket vers le serveur
+     * fermeture du socket vers le serveur puis de l'application
      */
     public static void deconnection(){
         try{

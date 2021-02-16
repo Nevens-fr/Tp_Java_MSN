@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
  * 
  * @param WIN_WIDTH la largeur de la fenetre
  * @param WIN_HEIGHT la hauteur de la fenetre
- * @param contentPane le gestionnaire de placement dans la fenetre
+ * @param principalPanel le gestionnaire de placement dans la fenetre
  * @param serialVersionUID numéro de version
  * @param estConnecte Défini si l'utilisateur est connecté ou non
  * @param connexion La classe contenant le necessaire pour se connecter au serveur
@@ -25,7 +25,7 @@ import javax.swing.border.EmptyBorder;
 */
 public class Fenetre extends JFrame{
     
-    private int WIN_WIDTH = 980, WIN_HEIGHT = 680;
+    private final int WIN_WIDTH = 980, WIN_HEIGHT = 680;
     private static final long serialVersionUID = -4939544011287453046L;
     private JPanel principalPanel;
     private Connexion connexion;
@@ -47,6 +47,8 @@ public class Fenetre extends JFrame{
         this.setResizable(false);
 
         this.setLocationRelativeTo(null);
+
+        UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Arial", Font.BOLD, 14));
 
         principalPanel = new JPanel();
         principalPanel.setLayout(new BorderLayout(20 , 20));

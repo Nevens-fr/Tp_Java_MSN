@@ -11,7 +11,6 @@ import java.util.*;
  * @version 1.0
  */
 
-
 /**
  * Une classe Client étendant les threads, permet de gèrer toutes les interactions réseaux avec un client
  * @param sock le socket relié au client
@@ -67,7 +66,7 @@ public class Client extends Thread{
 
     /**
      * Regarde si un message à été reçu depuis le client, l'extrait et le range
-     * @return
+     * @return true si un message est lu, false sinon
      */
     public boolean lit(){
         int stream;

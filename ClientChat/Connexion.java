@@ -47,15 +47,10 @@ public class Connexion implements ActionListener{
         bouton.getBouton().setEnabled(false);
 
         this.nom = nom;
-        this.nom.setText(null);
         this.ip = ip;
-        this.ip.setText(null);
         this.port = port;
-        this.port.setText(null);
 
-        nomText = null;
-        ipText = null;
-        portText = null;
+        setChamps(true, "Connection");
 
         //Ajout d'un listener sur le champs nom afin de vérifier s'il est rempli
         nom.getDocument().addDocumentListener(new DocumentListener(){
@@ -208,20 +203,17 @@ public class Connexion implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent arg0){
         if(fenetre.getEstConnecte() == false){
-            nomText = nom.getText();
-            ipText = ip.getText();
-            portText = port.getText();
-
             fenetre.setEstConnecte(true);
 
-            nom.setEditable(false);
-            ip.setEditable(false);
-            port.setEditable(false);
-            bouton.getBouton().setText("Déconnection");
+            setChamps(false, "Déconnection");
 
             if(Main.connectionServeur()){
                 Main.envoiServeur("LOGI"+nomText);
                 fenetre.getConnect().getConnectes().setText("<br/><p> <font color=\"red\">"+nomText+"</font>");
+            }
+            else{
+                fenetre.setEstConnecte(false);
+                setChamps(true, "Connection");
             }
         }
         else{
@@ -232,15 +224,17 @@ public class Connexion implements ActionListener{
 
     /**
      * Remet les champs dans un état d'attente de connection
+     * @param etat l'état dans lequel on souhaite mettre les champs
+     * @param String le text a mettre dans le bouton
      */
-    public void resetChamps(){
+    public void setChamps(boolean etat, String text){
         nomText = nom.getText();
         ipText = ip.getText();
         portText = port.getText();
 
-        nom.setEditable(true);
-        ip.setEditable(true);
-        port.setEditable(true);
-        bouton.getBouton().setText("Connection");
+        nom.setEditable(etat);
+        ip.setEditable(etat);
+        port.setEditable(etat);
+        bouton.getBouton().setText(text);
     }
 }

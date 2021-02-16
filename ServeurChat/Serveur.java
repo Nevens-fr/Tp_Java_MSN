@@ -9,6 +9,13 @@ import java.util.*;
  * @version 1.0
  */
 
+/**
+ * Le serveur du système de messagerie, qui assure une connexion entre tous les utilisateurs
+ * 
+ * @param listeDesClients une liste contenant des instances de la classe Client représentant des utilisateurs connectés
+ * @param serveur Le serverSocket permettant de connecter tous les clients
+ */
+
 public class Serveur {
 
     private static List<Client> listeDesClients;
@@ -42,7 +49,7 @@ public class Serveur {
 
     /**
      * Supprime le client passé en paramètre de la liste des sockets connectés
-     * @param client
+     * @param client le client a retiré de la liste
      */
     public static void supprimeClient(Client client){
         listeDesClients.remove(client);

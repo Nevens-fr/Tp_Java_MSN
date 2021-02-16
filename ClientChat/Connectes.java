@@ -18,7 +18,6 @@ import java.util.ArrayList;
  * @param listeCo Liste des utilisateurs connectés avec formattage HTML
  * @param listeCouleur liste des couleurs disponibles pour les utilisateurs
  * @param comboBox  Permet de définir le destinataire du message
- * @param userConnectes tableau des utilisateurs connectés sans formattage HTML
  */
 public class Connectes{
     
@@ -27,7 +26,6 @@ public class Connectes{
     private ArrayList<String> listeCo;
     private ArrayList<String> listeCouleur;
     private JComboBox<String> comboBox;
-    private ArrayList<String> userConnectes;
 
     /**
      * Constructeur
@@ -36,9 +34,6 @@ public class Connectes{
     public Connectes(Fenetre fenetre){
         this.fenetre = fenetre;
         this.connectes = new JEditorPane();
-
-        userConnectes = new ArrayList<String>();
-        userConnectes.add("Général");
 
         this.connectes.setEditorKit(new HTMLEditorKit());
         this.connectes.setDocument(new HTMLDocument());
@@ -85,12 +80,12 @@ public class Connectes{
                 }
             }
             if(contient == false){
+
                 listeCouleur.remove(listeCouleur.size() - 1);
                 listeCo.add(e1);
                 ((HTMLEditorKit)connectes.getEditorKit()).insertHTML((HTMLDocument)connectes.getDocument(), connectes.getDocument().getLength(), e1, 0, 0, null);
-                Main.envoiServeur("LOGI"+fenetre.getConnexion().getNomTexte());
                 comboBox.addItem(e);
-                userConnectes.add(e);
+                Main.envoiServeur("LOGI"+fenetre.getConnexion().getNomTexte());
             }
         }
         catch(Exception exc){
@@ -108,7 +103,7 @@ public class Connectes{
 
     /**
      * Un nouveau message est reçu, on l'envoie pour affichage formatté avec la couleur
-     * @param e
+     * @param e Le message reçu depuis le serveur
      */
     public void nouveauMessage(String e){
         int tailleNom = e.indexOf(" ");
@@ -124,7 +119,7 @@ public class Connectes{
 
     /**
      * Réception  d'un message privé
-     * @param message le message recu
+     * @param message le message privé recu
      */
     public void nouveauMessagePrive(String message){
         String nomDest = new String("");
@@ -138,7 +133,6 @@ public class Connectes{
             message = message.substring(i + 1, message.length());
             String e = "<font color=\"#71463c\"> DE " + message + "</font>";
             fenetre.getChat().ecrireMessage(e);
-            //System.out.println("MESP" + message);
         }
     }
 
@@ -169,23 +163,15 @@ public class Connectes{
             if(elem.indexOf(e) >= 0){
                 try{
                     listeCo.remove(elem);
-                    userConnectes.remove(e);
                     comboBox.removeItem(e);
                     this.connectes.setDocument(new HTMLDocument());
                     this.connectes.setContentType("text/html");
                     connectes.setText("<br/><p> <font color=\"red\">"+fenetre.getConnexion().getNomTexte()+"</font>");
-                    for(String elem2 : listeCo){
-                        try{
-                            String send = elem2;
-                            ((HTMLEditorKit)connectes.getEditorKit()).insertHTML((HTMLDocument)connectes.getDocument(), 0, send, 0, 0, null);
-                        }
-                        catch(Exception exc){ }
-                    }
                 }
                 catch(Exception exc){   System.out.println("Marche po " + exc.getMessage());}
             }
         }
-        
+        Main.envoiServeur("LOGI"+fenetre.getConnexion().getNomTexte());
     }
 
     /**
