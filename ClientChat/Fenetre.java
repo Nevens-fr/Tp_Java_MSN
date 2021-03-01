@@ -48,7 +48,12 @@ public class Fenetre extends JFrame{
 
         this.setLocationRelativeTo(null);
 
-        UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Arial", Font.BOLD, 14));
+        try{
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch(Exception e){
+
+        }
 
         principalPanel = new JPanel();
         principalPanel.setLayout(new BorderLayout(20 , 20));

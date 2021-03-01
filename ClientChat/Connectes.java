@@ -5,6 +5,7 @@ import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * @author Aurélien Tudoret
@@ -39,10 +40,11 @@ public class Connectes{
         this.connectes.setDocument(new HTMLDocument());
         this.connectes.setContentType("text/html");
         this.connectes.setText("<p>Aucun connecté</p>");
-        this.connectes.setPreferredSize(new Dimension(100, 50));
+        this.connectes.setPreferredSize(new Dimension(50, 50));
 
         comboBox = new JComboBox<String>();
         comboBox.addItem("Général");
+        comboBox.setPreferredSize(new Dimension(150, 50));
 
         listeCo = new ArrayList<String>();
         listeCouleur = new ArrayList<String>();
@@ -159,19 +161,35 @@ public class Connectes{
      */
     public void removeUtilisateur(String e){
 
-        for(String elem : listeCo){
-            if(elem.indexOf(e) >= 0){
+        Iterator<String> ite = listeCo.iterator();
+
+        while(ite.hasNext()){
+            String tmp = ite.next();
+            if(tmp.indexOf(e) >= 0 && listeCo.size() >= 1){
                 try{
-                    listeCo.remove(elem);
+                    listeCo.remove(tmp);
+                    ite.remove();
                     comboBox.removeItem(e);
                     this.connectes.setDocument(new HTMLDocument());
                     this.connectes.setContentType("text/html");
                     connectes.setText("<br/><p> <font color=\"red\">"+fenetre.getConnexion().getNomTexte()+"</font>");
+
+                    if(listeCo.size() >= 1){
+                        //réinsertion des utilisateurs connectés
+                        for(String elem2: listeCo){
+                            try{
+                                String send = elem2;
+                                ((HTMLEditorKit)connectes.getEditorKit()).insertHTML((HTMLDocument)connectes.getDocument(), connectes.getDocument().getLength(), send, 0, 0, null);
+                            }
+                            catch(Exception e1){
+                                System.out.println("Erreur insertion des utilisateurs " + e1.getMessage());
+                            }
+                        }
+                    }
                 }
-                catch(Exception exc){   System.out.println("Marche po " + exc.getMessage());}
+            catch(Exception exc){   /*System.out.println("Erreur suppression utilisateur " + exc.getMessage());*/}
             }
         }
-        Main.envoiServeur("LOGI"+fenetre.getConnexion().getNomTexte());
     }
 
     /**
