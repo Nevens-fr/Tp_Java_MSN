@@ -87,12 +87,13 @@ public class Connectes{
                 listeCo.add(e1);
                 ((HTMLEditorKit)connectes.getEditorKit()).insertHTML((HTMLDocument)connectes.getDocument(), connectes.getDocument().getLength(), e1, 0, 0, null);
                 comboBox.addItem(e);
-                Main.envoiServeur("LOGI"+fenetre.getConnexion().getNomTexte());
             }
         }
         catch(Exception exc){
 
         }
+
+        Main.envoiServeur("LOGI"+fenetre.getConnexion().getNomTexte());
     }
 
     /**
@@ -162,9 +163,16 @@ public class Connectes{
     public void removeUtilisateur(String e){
 
         Iterator<String> ite = listeCo.iterator();
+        String tmp = null;
+        boolean test = true;
 
-        while(ite.hasNext()){
-            String tmp = ite.next();
+        while(ite.hasNext() && test){
+            try{
+                tmp = ite.next();
+            }
+            catch(Exception exc){
+
+            }
             if(tmp.indexOf(e) >= 0 && listeCo.size() >= 1){
                 try{
                     listeCo.remove(tmp);
@@ -187,7 +195,9 @@ public class Connectes{
                         }
                     }
                 }
-            catch(Exception exc){   /*System.out.println("Erreur suppression utilisateur " + exc.getMessage());*/}
+                catch(Exception exc){   
+                    test = false;
+                }
             }
         }
     }
