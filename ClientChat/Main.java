@@ -1,6 +1,7 @@
 package ClientChat;
 
 import java.net.Socket;
+import java.util.Random;
 import java.io.BufferedInputStream;
 import java.io.PrintWriter;
 
@@ -56,6 +57,7 @@ public class Main{
                 private String message;
                 public void run(){
                     message = null;
+                    Random duree = new Random();
                     while(socks.isClosed() == false){
                         //lecture de message du serveur
                         try{
@@ -65,8 +67,15 @@ public class Main{
                             //création d'un nouveau thread pour traiter chaque message
                             Thread traitement = new Thread(new Runnable(){
                                 public void run(){
-                                    if(message.indexOf("LOGI") >= 0)
+                                    if(message.indexOf("LOGI") >= 0){
+                                        try{
+                                            Thread.sleep(duree.nextInt(500)*2);
+                                        }
+                                        catch(Exception e){
+                                            System.out.println("Erreur génération nombre aléatoire thread main");
+                                        }
                                         connect.addConnecteUtilisateur(message.substring(4, message.length()));
+                                    }
                                     else if(message.indexOf("LOGO") >= 0)
                                         connect.removeUtilisateur(message.substring(4, message.length()));
                                     else if(message.indexOf("MESP") >= 0)
@@ -99,11 +108,12 @@ public class Main{
         
         try{
             ecrire =  new PrintWriter(socks.getOutputStream());
+            ecrire.write(e);
+            ecrire.flush();
         }
         catch(Exception exc){   }
 
-        ecrire.write(e);
-        ecrire.flush();
+        
     }
 
     /**
