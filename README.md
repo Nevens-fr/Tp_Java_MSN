@@ -5,8 +5,8 @@ Tudoret Aurélien, L3 Info
 Port pour le serveur : 64992
 
 Problèmes connus :
-    - Smileys ne s'affichent pas sous Mac. Affichage normal sous Linux et Windows
-    - Bug à la connexion qui arrive quelques fois, nom du nouvel arrivant doublé ou concaténation avec celui d'un autre utilisateur
+    - Les smileys ne s'affichent pas sous Mac. Affichage normal sous Linux et Windows
+    - Lorsqu'un utilisateur se déconnecte, il ne disparait pas de la zone des connectés des autres
 
 Note de compilation, utiliser la commande :
 'javac ClientChat/*.java'

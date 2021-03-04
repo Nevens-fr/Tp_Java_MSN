@@ -87,13 +87,12 @@ public class Connectes{
                 listeCo.add(e1);
                 ((HTMLEditorKit)connectes.getEditorKit()).insertHTML((HTMLDocument)connectes.getDocument(), connectes.getDocument().getLength(), e1, 0, 0, null);
                 comboBox.addItem(e);
+                Main.envoiServeur("LOGI"+fenetre.getConnexion().getNomTexte());
             }
         }
         catch(Exception exc){
 
         }
-
-        Main.envoiServeur("LOGI"+fenetre.getConnexion().getNomTexte());
     }
 
     /**
@@ -164,9 +163,8 @@ public class Connectes{
 
         Iterator<String> ite = listeCo.iterator();
         String tmp = null;
-        boolean test = true;
 
-        while(ite.hasNext() && test){
+        while(ite.hasNext()){
             try{
                 tmp = ite.next();
             }
@@ -196,7 +194,7 @@ public class Connectes{
                     }
                 }
                 catch(Exception exc){   
-                    test = false;
+                    
                 }
             }
         }
