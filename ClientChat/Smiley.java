@@ -54,16 +54,16 @@ public class Smiley implements ActionListener {
         pane.setLayout(new GridLayout(2,3));
         pane.setPreferredSize(new Dimension(300, 75));
 
-        JButton sourire = new JButton("<html><h1>&#128522</h1></html>");//sourire
+        JButton sourire = new JButton("<html><p style=\"font-size:16\">&#128522</p></html>");//sourire
         sourire.setBorderPainted(false);
         sourire.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0){
                 message.setText(message.getText() + "&#128522");
-                //miniFenetre.dispatchEvent(new WindowEvent(miniFenetre, WindowEvent.WINDOW_CLOSING));; close window
+                //miniFenetre.dispatchEvent(new WindowEvent(miniFenetre, WindowEvent.WINDOW_CLOSING)); close window
             }
         });
 
-        JButton innocent = new JButton("<html><h1>&#128519</h1></html>");//innocent
+        JButton innocent = new JButton("<html><p style=\"font-size:16\">&#128519</p></html>");//innocent
         innocent.setBorderPainted(false);
         innocent.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0){
@@ -71,7 +71,7 @@ public class Smiley implements ActionListener {
             }
         });
 
-        JButton rire = new JButton("<html><h1>&#128514</h1></html>");//rire
+        JButton rire = new JButton("<html><p style=\"font-size:16\">&#128514</p></html>");//rire
         rire.setBorderPainted(false);
         rire.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0){
@@ -79,7 +79,7 @@ public class Smiley implements ActionListener {
             }
         });
 
-        JButton clinDOeil = new JButton("<html><h1>&#128521</h1></html>");//clinDOeil
+        JButton clinDOeil = new JButton("<html><p style=\"font-size:16\">&#128521</p></html>");//clinDOeil
         clinDOeil.setBorderPainted(false);
         clinDOeil.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0){
@@ -87,7 +87,7 @@ public class Smiley implements ActionListener {
             }
         });
 
-        JButton tongue = new JButton("<html><h1>&#128539</h1></html>");//tongue
+        JButton tongue = new JButton("<html><p style=\"font-size:16\">&#128539</p></html>");//tongue
         tongue.setBorderPainted(false);
         tongue.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0){
@@ -95,7 +95,7 @@ public class Smiley implements ActionListener {
             }
         });
 
-        JButton noMouth = new JButton("<html><h1>&#128566</h1></html>");//noMouth
+        JButton noMouth = new JButton("<html><p style=\"font-size:16\">&#128566</p></html>");//noMouth
         noMouth.setBorderPainted(false);
         noMouth.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0){
