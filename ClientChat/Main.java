@@ -64,12 +64,12 @@ public class Main{
                             stream = lecture.read(b);
                             message = new String(b, 0, stream);
 
-                            //création d'un nouveau thread pour traiter chaque message
+                            //création d'un nouveau thread pour traiter chaque message reçu
                             Thread traitement = new Thread(new Runnable(){
                                 public void run(){
                                     if(message.indexOf("LOGI") >= 0){
                                         try{
-                                            Thread.sleep(duree.nextInt(500)*2);
+                                            Thread.sleep(duree.nextInt(500)*2);//attends une durée aléatoire pour éviter les concurences sur l'accès aux datas
                                         }
                                         catch(Exception e){
                                             System.out.println("Erreur génération nombre aléatoire thread main");

@@ -120,7 +120,7 @@ public class Chat implements ActionListener {
 
     /**
      * Getter du fil de discussion
-     * @return JTextPane la zone de texte de la discussion
+     * @return JEditorPane la zone de texte de la discussion
      */
     public JEditorPane getDiscussion(){
         return discussion;

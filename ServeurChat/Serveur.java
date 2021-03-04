@@ -53,7 +53,7 @@ public class Serveur {
      */
     public static void supprimeClient(Client client){
         listeDesClients.remove(client);
-        System.out.println("Client déconnecté ! "+ listeDesClients.size() + "connecté(s) restant(s)");
+        System.out.println("Client déconnecté ! "+ listeDesClients.size() + " connecté(s) restant(s)");
     }
 
     /**

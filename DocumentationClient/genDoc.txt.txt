@@ -1,2 +1,2 @@
-javadoc ../SrcClientChat/*.java
+javadoc ../ClientChat/*.java
 jar cvfe Client.jar SrcClientChat/Main  ./SrcClientChat/*.class

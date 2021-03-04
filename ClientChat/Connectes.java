@@ -169,11 +169,9 @@ public class Connectes{
                 tmp = ite.next();
             }
             catch(Exception exc){
-
             }
-            if(tmp.indexOf(e) >= 0 && listeCo.size() >= 1){
+            if(tmp.indexOf(e) >= 0){
                 try{
-                    listeCo.remove(tmp);
                     ite.remove();
                     comboBox.removeItem(e);
                     this.connectes.setDocument(new HTMLDocument());
